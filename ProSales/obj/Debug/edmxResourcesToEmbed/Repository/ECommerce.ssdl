@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ECommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="ContactNo" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="int" Nullable="false" />
+    <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+    <Property Name="InvoiceTotal" Type="decimal" Precision="20" Scale="2" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" />
+    <Property Name="CostPrice" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="SellingPrice" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="ProductImage" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="SalesTransaction">
+    <Key>
+      <PropertyRef Name="SalesTransactionId" />
+    </Key>
+    <Property Name="SalesTransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" />
+    <Property Name="Price" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Total" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="CustomerId" Type="int" />
+    <Property Name="SalesDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK__SalesTran__Custo__15502E78">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="SalesTransaction" Type="Self.SalesTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="SalesTransaction">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalesTran__Produ__145C0A3F">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="SalesTransaction" Type="Self.SalesTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="SalesTransaction">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ECommerceModelStoreContainer">
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesTransaction" EntityType="Self.SalesTransaction" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__SalesTran__Custo__15502E78" Association="Self.FK__SalesTran__Custo__15502E78">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="SalesTransaction" EntitySet="SalesTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalesTran__Produ__145C0A3F" Association="Self.FK__SalesTran__Produ__145C0A3F">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="SalesTransaction" EntitySet="SalesTransaction" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

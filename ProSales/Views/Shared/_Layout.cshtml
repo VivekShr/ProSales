@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container banner" >
+        <h1 class="logo">Pro-Sales</h1>
+    </div>
+    <div class="container body-content">
+            <div class="row container1">
+                <div class="col-md-3 menu-content">
+                    <div class="menu-wraper clear noprint">
+                        <div id="cssmenu" style="padding-right: 0px; outline: medium none; overflow: hidden; min-height: inherit;">
+                            <ul>
+                                <li class="menuItems">
+                                    <a href="/SalesTransaction/GetProducts"><span>Products</span></a>
+                                </li>
+                                <li class="menuItems">
+                                    <a href="/Customer"><span>Customers</span></a>
+                                </li>
+                                <li class="menuItems">
+                                    <a href="/SalesTransaction/GetProducts"><span>Sales Transaction</span></a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="content-center col-md-9">@RenderBody()</div>
+            </div>
+        <div class="clearfix"></div>
+        <hr />
+        <div class="row">
+            <div class="clearfix"></div>
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
