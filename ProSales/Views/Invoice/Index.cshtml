@@ -1,0 +1,32 @@
+﻿@model List<ProSales.ViewModel.InvoiceViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Invoice</h2>
+<hr />
+<div style="width: 100%;" class="form-group">
+    @*<div class="row">*@
+        @Html.DropDownList("customerDdl", (IEnumerable<SelectListItem>)ViewBag.CustomerList, "Select Customer", new { @id = "customerDll", @class = "form-control" })
+    @*</div>*@
+
+</div>
+<div id="partialInvoiceGrid">
+    @Html.Partial("_PartialInvoiceGrid", Model)
+    
+</div>
+<script>
+    $(document).ready(function () {
+        $("#customerDll").val(GetQueryStringParams("customerId"));
+        $("#customerDll").on("change", function () {
+            LoadPartial();
+        });
+    });
+
+    function LoadPartial() {
+        var custId = $("#customerDll").val();
+        $.get("/Invoice/PartialInvoiceGrid?customerId=" + custId, function (data) {
+            $("#partialInvoiceGrid").html(data);
+        });
+    }
+</script>

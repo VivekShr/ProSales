@@ -13,7 +13,7 @@
       <PropertyRef Name="InvoiceId" />
     </Key>
     <Property Name="InvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="InvoiceNumber" Type="int" Nullable="false" />
+    <Property Name="InvoiceNumber" Type="varchar" MaxLength="40" />
     <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
     <Property Name="InvoiceTotal" Type="decimal" Precision="20" Scale="2" />
   </EntityType>
@@ -38,6 +38,7 @@
     <Property Name="Total" Type="decimal" Precision="20" Scale="2" />
     <Property Name="CustomerId" Type="int" />
     <Property Name="SalesDate" Type="datetime" />
+    <Property Name="InvoiceId" Type="int" />
   </EntityType>
   <Association Name="FK__SalesTran__Custo__15502E78">
     <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
@@ -48,6 +49,18 @@
       </Principal>
       <Dependent Role="SalesTransaction">
         <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SalesTran__Invoi__21B6055D">
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="0..1" />
+    <End Role="SalesTransaction" Type="Self.SalesTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="SalesTransaction">
+        <PropertyRef Name="InvoiceId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -70,6 +83,10 @@
     <EntitySet Name="SalesTransaction" EntityType="Self.SalesTransaction" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__SalesTran__Custo__15502E78" Association="Self.FK__SalesTran__Custo__15502E78">
       <End Role="Customer" EntitySet="Customer" />
+      <End Role="SalesTransaction" EntitySet="SalesTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SalesTran__Invoi__21B6055D" Association="Self.FK__SalesTran__Invoi__21B6055D">
+      <End Role="Invoice" EntitySet="Invoice" />
       <End Role="SalesTransaction" EntitySet="SalesTransaction" />
     </AssociationSet>
     <AssociationSet Name="FK__SalesTran__Produ__145C0A3F" Association="Self.FK__SalesTran__Produ__145C0A3F">

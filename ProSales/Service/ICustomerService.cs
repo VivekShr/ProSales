@@ -10,6 +10,7 @@ namespace ProSales.Service
     public interface ICustomerService
     {
         IList<CustomerViewModel> GetCustomers();
+        Customer GetCustomerById(int customerId);
         IList<SelectModel> GetCustomerDdl();
     }
 }

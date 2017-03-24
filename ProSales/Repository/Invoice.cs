@@ -14,9 +14,16 @@ namespace ProSales.Repository
     
     public partial class Invoice
     {
+        public Invoice()
+        {
+            this.SalesTransaction = new HashSet<SalesTransaction>();
+        }
+    
         public int InvoiceId { get; set; }
-        public int InvoiceNumber { get; set; }
+        public string InvoiceNumber { get; set; }
         public System.DateTime InvoiceDate { get; set; }
         public Nullable<decimal> InvoiceTotal { get; set; }
+    
+        public virtual ICollection<SalesTransaction> SalesTransaction { get; set; }
     }
 }

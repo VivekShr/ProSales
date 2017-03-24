@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ProSales.ViewModel.SalesTransactionViewModel>
+
+@{
+    ViewBag.Title = "Sales";
+}
+<h2>Sales Transaction</h2>
+<hr />
+<style>
+    .ddls {
+        padding-bottom: 10px;
+    }
+</style>
+<div style="width: 100%;" class="form-group">
+    <div class="row ddls">
+        <div class="col-md-4">
+            @Html.DropDownList("customerDdl", (IEnumerable<SelectListItem>)ViewBag.CustomerList, "Select Customer", new { @id = "customerDll", @class = "form-control" })
+        </div>
+        
+        <div class="col-md-8">
+            <a class="btn btn-success pull-right"  href="/SalesTransaction/Add">Add New</a>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <input type='text' id='datetimepicker1' class="form-control" placeholder="Select Date" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            @*@Html.ActionLink("Generate Invoice", "Generate", "Invoice", null, new { @id = "invoiceBtn", @class = "btn btn-primary", @style = "display:none" })*@
+            <button id="invoiceBtn" class="btn btn-primary" style="display:none" onclick="GenerateInvoice()">Generate Invoice</button>
+        </div>
+    </div>
+    
+</div>
+<hr />
+<div id="partialSalesGrid">
+    @Html.Partial("_PartialSalesTransaction", Model)
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#datetimepicker1').datepicker();
+        $("#customerDll").val(GetQueryStringParams("customerId"));
+
+        $("#customerDll").on("change", function () {
+            LoadPartial();
+            if ($(this).val() != 0) {
+                //$("#invoiceBtn").prop("href", "/Invoice/Generate?customerId=" + $(this).val());
+                $("#invoiceBtn").show();
+            }
+            else {
+                $("#invoiceBtn").prop("href", "#");
+                $("#invoiceBtn").hide();
+            }
+        });
+    });
+
+    function LoadPartial() {
+        var custId = $("#customerDll").val();
+        $.get("/SalesTransaction/PartialSalesGrid?customerId=" + custId, function (data) {
+            $("#partialSalesGrid").html(data);
+        });
+    }
+
+    function GenerateInvoice()
+    {
+        var custId = $("#customerDll").val();
+        var selectedDate = $("#datetimepicker1").val();
+        $.ajax({
+            method: "POST",
+            url: "/Invoice/Generate?customerId=" + custId + "&salesDate=" + selectedDate,
+            async: false,
+            data: null, //$("#ddls").serialize(),
+            error: function (xhr, ajaxOptions, thrownError) {
+                $(".modal-title").html("ProSales");
+                $(".modal-body").html(xhr.responseText);
+                $('#myModal').modal('show');
+
+            },
+            success: function (data) {
+                $(".modal-title").html("ProSales");
+                $(".modal-body").html("Invoice generated successfully");
+                $('#myModal').modal('show');
+                $('#myModal').on('hidden.bs.modal', function () {
+                    window.location.href = "/Invoice/Detail/" + data;
+                });
+            }
+        });
+    }
+</script>
+

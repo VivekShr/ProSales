@@ -1,4 +1,5 @@
-﻿using ProSales.IOC;
+﻿using ProSales.AutoMapProvider;
+using ProSales.IOC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace ProSales
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperConfig.Configure();
         }
     }
 }

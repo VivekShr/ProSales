@@ -21,8 +21,10 @@ namespace ProSales.Repository
         public Nullable<decimal> Total { get; set; }
         public Nullable<int> CustomerId { get; set; }
         public Nullable<System.DateTime> SalesDate { get; set; }
+        public Nullable<int> InvoiceId { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Invoice Invoice { get; set; }
     }
 }

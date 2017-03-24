@@ -95,7 +95,7 @@ input[type="checkbox"].input-validation-error {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     text-align: left;
-    line-height: 22px;
+    line-height: 30px;
     color: inherit;
     text-decoration: none;
 }

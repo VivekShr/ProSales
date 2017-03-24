@@ -18,6 +18,11 @@ namespace ProSales
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "SalesTransaction", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "Sales",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "SalesTransaction", action = "Sales", id = UrlParameter.Optional }
+            );
         }
     }
 }

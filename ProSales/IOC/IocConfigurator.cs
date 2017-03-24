@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace ProSales.IOC
 {
@@ -45,14 +46,13 @@ namespace ProSales.IOC
             builder.RegisterAssemblyModules(typeof(MvcApplication).Assembly);
             #endregion
 
-            builder.RegisterType<ProductService>()
-            .As<IProductService>()
-            .InstancePerRequest();
-            builder.RegisterType<CustomerService>()
-            .As<ICustomerService>()
-            .InstancePerRequest();
+            builder.RegisterType<ECommerceEntities>().As<DbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<ProductService>().As<IProductService>().InstancePerRequest();
+            builder.RegisterType<CustomerService>().As<ICustomerService>().InstancePerRequest();
             builder.RegisterType<ECommerceEntities>().InstancePerRequest();
-            
+            builder.RegisterType<SalesTransactionService>().As<ISalesTransactionService>().InstancePerRequest();
+            //builder.RegisterType<ECommerceEntities>().InstancePerLifetimeScope();
+            builder.RegisterType<InvoiceService>().As<IInvoiceService>().InstancePerRequest();
             //builder.Register(c => new A(c.Resolve<B>()));
             //builder.Register(c =>
             //{

@@ -26,8 +26,8 @@ namespace ProSales.Repository
         }
     
         public DbSet<Customer> Customer { get; set; }
-        public DbSet<Invoice> Invoice { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<SalesTransaction> SalesTransaction { get; set; }
+        public DbSet<Invoice> Invoice { get; set; }
     }
 }

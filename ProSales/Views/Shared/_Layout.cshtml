@@ -7,6 +7,10 @@
     @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/common.js"></script>
 </head>
 <body>
     <div class="container banner" >
@@ -25,7 +29,10 @@
                                     <a href="/Customer"><span>Customers</span></a>
                                 </li>
                                 <li class="menuItems">
-                                    <a href="/SalesTransaction/GetProducts"><span>Sales Transaction</span></a>
+                                    <a href="/SalesTransaction/Sales"><span>Sales Transaction</span></a>
+                                </li>
+                                <li class="menuItems">
+                                    <a href="/Invoice"><span>Invoice</span></a>
                                 </li>
                             </ul>
 
@@ -43,8 +50,27 @@
             </footer>
         </div>
     </div>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
-    @Scripts.Render("~/bundles/jquery")
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    Some text in the modal.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @*@Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

@@ -10,16 +10,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Invoice">
-      <EntityTypeMapping TypeName="ECommerceModel.Invoice">
-        <MappingFragment StoreEntitySet="Invoice">
-          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
-          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
-          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
-          <ScalarProperty Name="InvoiceTotal" ColumnName="InvoiceTotal" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Product">
       <EntityTypeMapping TypeName="ECommerceModel.Product">
         <MappingFragment StoreEntitySet="Product">
@@ -34,6 +24,7 @@
     <EntitySetMapping Name="SalesTransaction">
       <EntityTypeMapping TypeName="ECommerceModel.SalesTransaction">
         <MappingFragment StoreEntitySet="SalesTransaction">
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
           <ScalarProperty Name="SalesTransactionId" ColumnName="SalesTransactionId" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="Price" ColumnName="Price" />
@@ -41,6 +32,16 @@
           <ScalarProperty Name="Total" ColumnName="Total" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="SalesDate" ColumnName="SalesDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invoice">
+      <EntityTypeMapping TypeName="ECommerceModel.Invoice">
+        <MappingFragment StoreEntitySet="Invoice">
+          <ScalarProperty Name="InvoiceTotal" ColumnName="InvoiceTotal" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

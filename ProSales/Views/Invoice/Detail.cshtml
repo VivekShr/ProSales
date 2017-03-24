@@ -1,0 +1,27 @@
+﻿@model ProSales.ViewModel.InvoiceViewModel
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Invoice Detail</h2>
+<hr />
+<div class="container" style="border: 1px solid #000; border-radius:5px; padding: 5px">
+    <div class="row">
+        @Html.HiddenFor(model => model.CustomerId)
+        <label class="col-sm-2">Invoice Number</label>
+        <div class="col-sm-10">@Model.InvoiceNumber</div>
+    </div>
+    <div class="row">
+        <label class="col-sm-2">Invoice Date</label>
+        <div class="col-sm-10">@Model.InvoiceDate</div>
+    </div>
+    <div class="row">
+        <label class="col-sm-2">Customer</label>
+        <div class="col-sm-10">@Model.CustomerName</div>
+    </div>
+</div>
+<div style="margin-top:10px">
+   @Html.Partial("_PartialSalesDetail", Model.SalesTransactions)
+</div>
+

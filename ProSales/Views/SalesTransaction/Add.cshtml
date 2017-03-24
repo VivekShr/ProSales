@@ -1,0 +1,69 @@
+﻿<h2>Add New Sales Transaction</h2>
+
+<form id="addForm" action="/SalesTransaction/AddSalesTransaction" method="post" style="border: 1px solid #3E94C9; padding: 5px; border-radius: 5px">
+    <div class="form-group">
+        <div>
+            <label for="email">Customer</label>
+        </div>
+        <div>
+            @Html.DropDownList("customerId", (IEnumerable<SelectListItem>)ViewBag.CustomerList, "Select", new { @id = "customerDll", @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+
+        <label>Product</label>
+
+        @Html.DropDownList("productId", (IEnumerable<SelectListItem>)ViewBag.ProductList, "Select", new { @id = "productDdl", @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Price</label>
+        @Html.TextBox("price", string.Empty, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Quantity</label>
+        @Html.TextBox("quantity", string.Empty, new { @class = "form-control" })
+    </div>
+    <div>
+        <button class="btn btn-primary" type="button" id="addBtn">Add</button>
+        <button class="btn btn-warning" style="margin-left:10px;" type="button" id="cancelBtn">Cancel</button>
+    </div>
+</form>
+<div id="popUpMessage"></div>
+<script>
+    $(document).ready(function () {
+        $("#cancelBtn").click(function () {
+            window.location.href = "/SalesTransaction/Sales";
+        });
+
+        $("#productDdl").change(function () {
+            var txtProductTag = $("#productDdl>option:selected").text();
+            var price = txtProductTag.substring(txtProductTag.lastIndexOf('(') + 1, txtProductTag.lastIndexOf(')'));
+            $("#price").val(price);
+        });
+
+        $("#addBtn").click(function () {
+            $.ajax({
+                method:"POST",
+                url: "/SalesTransaction/Add",
+                async: false,
+                data: $("#addForm").serialize(),
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $(".modal-title").html("ProSales");
+                    $(".modal-body").html(xhr.responseText);
+                    $('#myModal').modal('show');
+
+                },
+                success: function (data) {
+                    $(".modal-title").html("ProSales");
+                    $(".modal-body").html("Data added successfully");
+                    $('#myModal').modal('show');
+                    $('#myModal').on('hidden.bs.modal', function () {
+                        window.location.href = "/SalesTransaction/Sales";
+                    })
+                }
+            });
+        })
+    });
+
+</script>
+
